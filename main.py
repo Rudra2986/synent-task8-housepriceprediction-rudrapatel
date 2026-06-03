@@ -15,6 +15,18 @@ This script automates the complete data science workflow:
 """
 
 import os
+import sys
+
+# Redirection for Streamlit Cloud deployment:
+# If this file (main.py) is executed under a Streamlit context or if the raw dataset is missing,
+# we redirect execution to streamlit_app.py to run the dashboard.
+is_streamlit = any("streamlit" in arg for arg in sys.argv)
+raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "raw", "housing.csv")
+
+if is_streamlit or not os.path.exists(raw_data_path):
+    import streamlit_app
+    sys.exit(0)
+
 import pandas as pd
 import numpy as np
 import joblib
