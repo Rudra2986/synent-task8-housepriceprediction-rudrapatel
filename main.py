@@ -24,7 +24,11 @@ is_streamlit = any("streamlit" in arg for arg in sys.argv)
 raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "raw", "housing.csv")
 
 if is_streamlit or not os.path.exists(raw_data_path):
-    import streamlit_app
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    app_path = os.path.join(current_dir, "streamlit_app.py")
+    with open(app_path, "r", encoding="utf-8") as f:
+        code = f.read()
+    exec(code, globals())
     sys.exit(0)
 
 import pandas as pd

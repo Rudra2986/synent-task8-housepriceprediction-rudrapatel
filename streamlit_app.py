@@ -40,7 +40,7 @@ st.markdown("""
         border-right: 1px solid #E6DFD5 !important;
     }
     
-    [data-testid="stSidebar"] * {
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] li, [data-testid="stSidebar"] label {
         color: #2C2B29 !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
