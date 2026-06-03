@@ -80,20 +80,25 @@ graph TD
 ---
 
 ## 🏆 Results Section
-*To be filled once the dataset is provided, models are trained, and performance is evaluated.*
-- **Best Performing Model:** `[Placeholder]`
-- **Evaluation Metrics:**
-  - Mean Absolute Error (MAE): `[Placeholder]`
-  - Root Mean Squared Error (RMSE): `[Placeholder]`
-  - R-squared ($R^2$): `[Placeholder]`
+Based on evaluations against the 20% test split, the models performed as follows:
+
+| Model | Mean Absolute Error (MAE) | Root Mean Squared Error (RMSE) | R-squared ($R^2$) |
+| :--- | :---: | :---: | :---: |
+| **Linear Regression** | $49,140.57 | $68,479.35 | 0.6436 |
+| **Decision Tree** | $40,634.34 | $61,758.74 | 0.7102 |
+| **Random Forest** | **$32,373.25** | **$50,299.60** | **0.8077** |
+
+- **Best Performing Model:** **Random Forest Regressor** (Champion Model)
+- **Explanation:** The Random Forest Regressor captured 80.77% of the variance in California house prices, outperforming the linear baseline by ~16.4% in R² and reducing prediction error (RMSE) by over $18,000. Capping tree depths at 20 ensured high accuracy while preventing extreme overfitting.
 
 ---
 
 ## 📈 Visualizations Section
-*Sample charts will be saved under the `images/` directory.*
-- `[Placeholder: Feature Importance Chart]`
-- `[Placeholder: Residuals Scatter Plot (Actual vs. Predicted Prices)]`
-- `[Placeholder: Model Comparison Bar Chart]`
+All charts are saved in the [images/](file:///c:/COLLEGE/Synent-Internship-2026/Task-8-House-Price-Prediction/images) folder:
+- **Model Comparison Charts:** [model_comparison_rmse.png](file:///c:/COLLEGE/Synent-Internship-2026/Task-8-House-Price-Prediction/images/model_comparison_rmse.png) and [model_comparison_r2.png](file:///c:/COLLEGE/Synent-Internship-2026/Task-8-House-Price-Prediction/images/model_comparison_r2.png) display metrics across the three models, clearly illustrating the Random Forest's superior performance.
+- **Residual Scatter Plot:** [residuals_plot.png](file:///c:/COLLEGE/Synent-Internship-2026/Task-8-House-Price-Prediction/images/residuals_plot.png) compares actual vs. predicted values for the Random Forest champion model, showing tight clustering along the identity line.
+- **Feature Importance Chart:** [feature_importances.png](file:///c:/COLLEGE/Synent-Internship-2026/Task-8-House-Price-Prediction/images/feature_importances.png) identifies `median_income` as the most significant pricing predictor, followed closely by geographical location (latitude/longitude) and density-based ratios (`bedrooms_per_room`).
+
 
 ---
 
