@@ -136,16 +136,14 @@ def load_assets():
     return None, None, None
 
 
-# Load a sample of raw data for interactive map visualization
+# Load a sample of processed data for interactive map visualization
 @st.cache_data
 def get_map_sample():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(current_dir, "data", "raw", "housing.csv")
+    csv_path = os.path.join(current_dir, "data", "processed", "map_sample.csv")
     if os.path.exists(csv_path):
         try:
-            df = pd.read_csv(csv_path)
-            # Sample 1200 points for smooth browser rendering
-            return df.sample(n=1200, random_state=42)
+            return pd.read_csv(csv_path)
         except Exception:
             return None
     return None

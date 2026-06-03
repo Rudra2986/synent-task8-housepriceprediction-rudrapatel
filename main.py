@@ -57,6 +57,11 @@ def main():
     # Keep track of features the model expects
     feature_names_out = df_processed.columns.tolist()
     
+    # Save a small sample of coordinates for the interactive map visualization in Streamlit
+    map_sample = df_cleaned[["longitude", "latitude", "median_house_value"]].sample(n=1200, random_state=42)
+    map_sample.to_csv(os.path.join(processed_dir, "map_sample.csv"), index=False)
+    print(f"Saved interactive map sample to: {os.path.join(processed_dir, 'map_sample.csv')}")
+    
     # 4. Save Processed Datasets
     # Split features and target to save them
     target_col = "median_house_value"
