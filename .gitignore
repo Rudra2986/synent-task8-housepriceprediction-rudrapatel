@@ -20,7 +20,9 @@ venv.bak/
 
 # Project specific
 data/
-models/
+models/*
+!models/*.joblib
+!models/.gitkeep
 reports/*.pdf
 reports/*.html
 reports/*.docx

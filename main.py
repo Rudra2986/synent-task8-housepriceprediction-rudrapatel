@@ -80,7 +80,7 @@ def main():
     models = {}
     models["Linear Regression"] = train_linear_regression(X_train, y_train)
     models["Decision Tree"] = train_decision_tree(X_train, y_train, max_depth=10)
-    models["Random Forest"] = train_random_forest(X_train, y_train, n_estimators=100, max_depth=20)
+    models["Random Forest"] = train_random_forest(X_train, y_train, n_estimators=60, max_depth=14)
     
     # 6. Evaluate Models
     metrics = {}

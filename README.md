@@ -86,10 +86,10 @@ Based on evaluations against the 20% test split, the models performed as follows
 | :--- | :---: | :---: | :---: |
 | **Linear Regression** | $49,140.57 | $68,479.35 | 0.6436 |
 | **Decision Tree** | $40,634.34 | $61,758.74 | 0.7102 |
-| **Random Forest** | **$32,373.25** | **$50,299.60** | **0.8077** |
+| **Random Forest** | **$33,379.29** | **$51,272.92** | **0.8002** |
 
 - **Best Performing Model:** **Random Forest Regressor** (Champion Model)
-- **Explanation:** The Random Forest Regressor captured 80.77% of the variance in California house prices, outperforming the linear baseline by ~16.4% in R² and reducing prediction error (RMSE) by over $18,000. Capping tree depths at 20 ensured high accuracy while preventing extreme overfitting.
+- **Explanation:** The Random Forest Regressor captured 80.02% of the variance in California house prices, outperforming the linear baseline by ~15.7% in R² and reducing prediction error (RMSE) by over $17,000. Capping tree depths at 14 and estimators at 60 allowed us to optimize model file sizes to ~24 MB for Git-compatibility and seamless Streamlit hosting.
 
 ---
 
