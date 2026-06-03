@@ -3,8 +3,8 @@ Streamlit Web Application - House Price Prediction Dashboard
 Synent Technologies - Data Science Internship (Summer 2026)
 Task 8: House Price Prediction (ML Model)
 
-An interactive, professional interface to predict California housing prices, 
-explore spatial coordinates, and view regression model performance metrics.
+An interactive, clean, and minimalist interface to predict California housing prices.
+Styled with a warm-cream light theme and elegant serif typography (Wabi-Sabi style).
 """
 
 import os
@@ -22,27 +22,98 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom minimal CSS for layout structure
+# Custom warm-cream light theme CSS
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+    /* Global styling overrides */
+    .stApp {
+        background-color: #FAF6F0 !important;
+        color: #2C2B29 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+    
+    /* Sidebar styling override */
+    [data-testid="stSidebar"] {
+        background-color: #F2EDE4 !important;
+        border-right: 1px solid #E6DFD5 !important;
+    }
+    
+    [data-testid="stSidebar"] * {
+        color: #2C2B29 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5, h6, [data-testid="stHeader"] {
+        font-family: 'Lora', Georgia, serif !important;
+        color: #384233 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Clean custom card style for predictions */
     .prediction-card {
-        background-color: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 8px;
+        background-color: #F2EDE4;
+        border: 1px solid #E6DFD5;
+        border-radius: 6px;
         padding: 1.5rem;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
+        color: #2C2B29;
     }
+    
     .metric-value {
+        font-family: 'Lora', Georgia, serif !important;
         font-size: 2.25rem;
-        font-weight: 800;
-        color: #1A365D;
+        font-weight: 600;
+        color: #384233;
+        margin-top: 0.25rem;
     }
+    
+    /* Style form buttons to be flat olive-green */
+    div.stButton > button:first-child {
+        background-color: #4A5844 !important;
+        color: #FAF6F0 !important;
+        border: 1px solid #4A5844 !important;
+        border-radius: 4px !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        font-weight: 500 !important;
+        padding: 0.5rem 1.5rem !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    div.stButton > button:first-child:hover {
+        background-color: #384233 !important;
+        border-color: #384233 !important;
+    }
+
+    /* Custom divider line */
+    hr {
+        border-color: #E6DFD5 !important;
+    }
+
+    /* Custom footer style */
     .footer-bar {
-        background-color: #F8FAFC;
-        border-top: 1px solid #E2E8F0;
-        padding: 1.5rem;
-        margin-top: 3rem;
-        border-radius: 8px;
+        border-top: 1px solid #E6DFD5;
+        padding-top: 1.5rem;
+        margin-top: 4rem;
+        font-size: 0.85rem;
+        color: #6B6862;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+    
+    .footer-bar a {
+        color: #4A5844 !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Code block override inside footer */
+    .footer-bar code {
+        background-color: #F2EDE4 !important;
+        color: #2C2B29 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        border: 1px solid #E6DFD5 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -138,19 +209,19 @@ else:
             longitude = st.slider("Longitude (Degrees West)", -124.35, -114.31, -118.24, step=0.01)
             latitude = st.slider("Latitude (Degrees North)", 32.54, 41.95, 34.05, step=0.01)
             
-            # Interactive Plotly Map
+            # Interactive Plotly Map styled to match warm cream background
             if sample_df is not None:
                 fig = px.scatter(
                     sample_df,
                     x="longitude",
                     y="latitude",
                     color="median_house_value",
-                    color_continuous_scale="Blues",
+                    color_continuous_scale="aggrnyl", # Muted green-yellow-teal scale
                     labels={"median_house_value": "Actual Value (USD)"},
                     opacity=0.6,
                     title="California Housing Values (Background Census Blocks)"
                 )
-                # Add user selected point
+                # Add user selected point as a red star with solid outline
                 fig.add_scatter(
                     x=[longitude],
                     y=[latitude],
@@ -159,10 +230,38 @@ else:
                     name="Your Selection"
                 )
                 fig.update_layout(
-                    margin=dict(l=0, r=0, t=30, b=0),
-                    plot_bgcolor="white",
-                    paper_bgcolor="white",
+                    paper_bgcolor="#FAF6F0",
+                    plot_bgcolor="#FAF6F0",
+                    font=dict(
+                        family="Plus Jakarta Sans, sans-serif",
+                        size=11,
+                        color="#2C2B29"
+                    ),
+                    title=dict(
+                        font=dict(
+                            family="Lora, Georgia, serif",
+                            size=14,
+                            color="#384233"
+                        )
+                    ),
+                    coloraxis_colorbar=dict(
+                        title=dict(font=dict(family="Lora, Georgia, serif", size=11, color="#384233")),
+                        tickfont=dict(family="Plus Jakarta Sans, sans-serif", size=10, color="#6B6862")
+                    ),
+                    margin=dict(l=0, r=0, t=40, b=0),
                     legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
+                )
+                fig.update_xaxes(
+                    showgrid=True, 
+                    gridcolor="#E6DFD5", 
+                    zeroline=False, 
+                    tickfont=dict(family="Plus Jakarta Sans, sans-serif", color="#6B6862")
+                )
+                fig.update_yaxes(
+                    showgrid=True, 
+                    gridcolor="#E6DFD5", 
+                    zeroline=False, 
+                    tickfont=dict(family="Plus Jakarta Sans, sans-serif", color="#6B6862")
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:
@@ -224,9 +323,9 @@ else:
                     st.markdown(
                         f"""
                         <div class="prediction-card">
-                            <div style="font-size: 0.9rem; color: #475569; text-transform: uppercase; font-weight: bold;">Estimated Median House Value</div>
+                            <div style="font-size: 0.9rem; color: #4A5844; text-transform: uppercase; font-weight: bold; font-family: 'Plus Jakarta Sans', sans-serif;">Estimated Median House Value</div>
                             <div class="metric-value">${predicted_price:,.0f}</div>
-                            <div style="font-size: 0.85rem; color: #64748B; margin-top: 0.5rem;">
+                            <div style="font-size: 0.85rem; color: #5A5C55; margin-top: 0.5rem; font-family: 'Plus Jakarta Sans', sans-serif;">
                                 Expected typical valuation range: <b>${lower_bound:,.0f} — ${upper_bound:,.0f}</b> (based on model MAE of $32,373).
                             </div>
                         </div>
@@ -288,7 +387,7 @@ else:
             if os.path.exists(importances_plot):
                 st.image(importances_plot, caption="Figure 4: Relative Feature Importance Weights (Random Forest)", use_container_width=True)
 
-# Styled Footer Banner
+# Styled Footer Banner matching warm cream layout
 st.markdown(
     """
     <div class="footer-bar">
